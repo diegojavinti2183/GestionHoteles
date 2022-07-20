@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HotelesEditDlg" widgetVar="HotelesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditHotelesTitle}">
+            <h:form id="HotelesEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{hotelesController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditHotelesLabel_hotCodigo}" for="hotCodigo" />
+                        <p:inputText id="hotCodigo" value="#{hotelesController.selected.hotCodigo}" title="#{bundle.EditHotelesTitle_hotCodigo}" required="true" requiredMessage="#{bundle.EditHotelesRequiredMessage_hotCodigo}" disabled="true"/>
+                        <p:outputLabel value="#{bundle.EditHotelesLabel_hotId}" for="hotId" />
+                        <p:inputText id="hotId" value="#{hotelesController.selected.hotId}" title="#{bundle.EditHotelesTitle_hotId}" required="true" requiredMessage="#{bundle.EditHotelesRequiredMessage_hotId}" maxlength="13" onkeyup="convertirMayusculas(this.id);" onblur="this.value = this.value.toUpperCase();"/>
+                        <p:outputLabel value="#{bundle.EditHotelesLabel_hotNombre}" for="hotNombre" />
+                        <p:inputText id="hotNombre" value="#{hotelesController.selected.hotNombre}" title="#{bundle.EditHotelesTitle_hotNombre}" required="true" requiredMessage="#{bundle.EditHotelesRequiredMessage_hotNombre}" size="60" maxlength="100" onkeyup="convertirMayusculas(this.id);" onblur="this.value = this.value.toUpperCase();"/>
+                        <p:outputLabel value="#{bundle.EditHotelesLabel_hotDireccion}" for="hotDireccion" />
+                        <p:inputText id="hotDireccion" value="#{hotelesController.selected.hotDireccion}" title="#{bundle.EditHotelesTitle_hotDireccion}" required="true" requiredMessage="#{bundle.EditHotelesRequiredMessage_hotDireccion}" size="60" maxlength="100" onkeyup="convertirMayusculas(this.id);" onblur="this.value = this.value.toUpperCase();"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{hotelesController.update}" value="#{bundle.Save}" update="display,:HotelesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'HotelesEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="HotelesEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

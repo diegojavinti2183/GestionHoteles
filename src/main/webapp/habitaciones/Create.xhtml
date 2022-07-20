@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HabitacionesCreateDlg" widgetVar="HabitacionesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateHabitacionesTitle}">
+            <h:form id="HabitacionesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{habitacionesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateHabitacionesLabel_habId}" for="habId" />
+                        <p:inputText id="habId" value="#{habitacionesController.selected.habId}" title="#{bundle.CreateHabitacionesTitle_habId}" required="true" requiredMessage="#{bundle.CreateHabitacionesRequiredMessage_habId}" maxlength="15" onkeyup="convertirMayusculas(this.id);" onblur="this.value = this.value.toUpperCase();"/>
+                        <p:outputLabel value="#{bundle.CreateHabitacionesLabel_habDescripcion}" for="habDescripcion" />
+                        <p:inputText id="habDescripcion" value="#{habitacionesController.selected.habDescripcion}" title="#{bundle.CreateHabitacionesTitle_habDescripcion}" required="true" requiredMessage="#{bundle.CreateHabitacionesRequiredMessage_habDescripcion}" size="60" maxlength="100" onkeyup="convertirMayusculas(this.id);" onblur="this.value = this.value.toUpperCase();"/>
+                        <p:outputLabel value="#{bundle.CreateHabitacionesLabel_habHotel}" for="habHotel" />
+                        <p:selectOneMenu id="habHotel" value="#{habitacionesController.selected.habHotel}" required="true" requiredMessage="#{bundle.EditHabitacionesRequiredMessage_habHotel}">
+                            <f:selectItems value="#{hotelesController.itemsAvailableSelectOne}"
+                                           var="habHotelItem"
+                                           itemValue="#{habHotelItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateHabitacionesLabel_habTipo}" for="habTipo" />
+                        <p:selectOneMenu id="habTipo" value="#{habitacionesController.selected.habTipo}" required="true" requiredMessage="#{bundle.EditHabitacionesRequiredMessage_habTipo}">
+                            <f:selectItems value="#{tipohabitacionesController.itemsAvailableSelectOne}"
+                                           var="habTipoItem"
+                                           itemValue="#{habTipoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{habitacionesController.create}" value="#{bundle.Save}" update="display,:HabitacionesListForm:datalist,:growl" oncomplete="handleSubmit(args,'HabitacionesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="HabitacionesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

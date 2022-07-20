@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HabitacionesViewDlg" widgetVar="HabitacionesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewHabitacionesTitle}">
+            <h:form id="HabitacionesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{habitacionesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewHabitacionesLabel_habCodigo}"/>
+                        <h:outputText value="#{habitacionesController.selected.habCodigo}" title="#{bundle.ViewHabitacionesTitle_habCodigo}"/>
+                        <h:outputText value="#{bundle.ViewHabitacionesLabel_habId}"/>
+                        <h:outputText value="#{habitacionesController.selected.habId}" title="#{bundle.ViewHabitacionesTitle_habId}"/>
+                        <h:outputText value="#{bundle.ViewHabitacionesLabel_habDescripcion}"/>
+                        <h:outputText value="#{habitacionesController.selected.habDescripcion}" title="#{bundle.ViewHabitacionesTitle_habDescripcion}"/>
+                        <h:outputText value="#{bundle.ViewHabitacionesLabel_habHotel}"/>
+                        <h:outputText value="#{habitacionesController.selected.habHotel}" title="#{bundle.ViewHabitacionesTitle_habHotel}">
+                            <f:converter converterId="objetoConverter"/>   
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewHabitacionesLabel_habTipo}"/>
+                        <h:outputText value="#{habitacionesController.selected.habTipo}" title="#{bundle.ViewHabitacionesTitle_habTipo}">
+                            <f:converter converterId="objetoConverter"/>   
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="HabitacionesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

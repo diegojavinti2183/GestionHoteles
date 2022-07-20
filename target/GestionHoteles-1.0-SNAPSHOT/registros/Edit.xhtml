@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RegistrosEditDlg" widgetVar="RegistrosEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditRegistrosTitle}">
+            <h:form id="RegistrosEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{registrosController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditRegistrosLabel_regNumero}" for="regNumero" />
+                        <p:inputText id="regNumero" value="#{registrosController.selected.regNumero}" title="#{bundle.EditRegistrosTitle_regNumero}" required="true" requiredMessage="#{bundle.EditRegistrosRequiredMessage_regNumero}" disabled="true"/>
+                        <p:outputLabel value="#{bundle.EditRegistrosLabel_regFecha}" for="regFecha" />
+                        <p:calendar id="regFecha" pattern="MM/dd/yyyy" value="#{registrosController.selected.regFecha}" title="#{bundle.EditRegistrosTitle_regFecha}" required="true" requiredMessage="#{bundle.EditRegistrosRequiredMessage_regFecha}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditRegistrosLabel_regFechainicio}" for="regFechainicio" />
+                        <p:calendar id="regFechainicio" pattern="MM/dd/yyyy HH:mm:ss" value="#{registrosController.selected.regFechainicio}" title="#{bundle.EditRegistrosTitle_regFechainicio}" required="true" requiredMessage="#{bundle.EditRegistrosRequiredMessage_regFechainicio}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditRegistrosLabel_regFechasalida}" for="regFechasalida" />
+                        <p:calendar id="regFechasalida" pattern="MM/dd/yyyy HH:mm:ss" value="#{registrosController.selected.regFechasalida}" title="#{bundle.EditRegistrosTitle_regFechasalida}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditRegistrosLabel_regObservacion}" for="regObservacion" />
+                        <p:inputText id="regObservacion" value="#{registrosController.selected.regObservacion}" title="#{bundle.EditRegistrosTitle_regObservacion}" />
+                        <p:outputLabel value="#{bundle.EditRegistrosLabel_regUsuarioing}" for="regUsuarioing" />
+                        <p:inputText id="regUsuarioing" value="#{registrosController.selected.regUsuarioing}" title="#{bundle.EditRegistrosTitle_regUsuarioing}" required="true" requiredMessage="#{bundle.EditRegistrosRequiredMessage_regUsuarioing}"/>
+                        <p:outputLabel value="#{bundle.EditRegistrosLabel_regFechaing}" for="regFechaing" />
+                        <p:calendar id="regFechaing" pattern="MM/dd/yyyy HH:mm:ss" value="#{registrosController.selected.regFechaing}" title="#{bundle.EditRegistrosTitle_regFechaing}" required="true" requiredMessage="#{bundle.EditRegistrosRequiredMessage_regFechaing}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditRegistrosLabel_regUsuariomod}" for="regUsuariomod" />
+                        <p:inputText id="regUsuariomod" value="#{registrosController.selected.regUsuariomod}" title="#{bundle.EditRegistrosTitle_regUsuariomod}" />
+                        <p:outputLabel value="#{bundle.EditRegistrosLabel_regFechamod}" for="regFechamod" />
+                        <p:calendar id="regFechamod" pattern="MM/dd/yyyy HH:mm:ss" value="#{registrosController.selected.regFechamod}" title="#{bundle.EditRegistrosTitle_regFechamod}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditRegistrosLabel_regCliente}" for="regCliente" />
+                        <p:selectOneMenu id="regCliente" value="#{registrosController.selected.regCliente}" required="true" requiredMessage="#{bundle.EditRegistrosRequiredMessage_regCliente}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{clientesController.itemsAvailableSelectOne}"
+                                           var="regClienteItem"
+                                           itemValue="#{regClienteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{registrosController.update}" value="#{bundle.Save}" update="display,:RegistrosListForm:datalist,:growl" oncomplete="handleSubmit(args, 'RegistrosEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RegistrosEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

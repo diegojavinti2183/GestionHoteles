@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DetalleregistroViewDlg" widgetVar="DetalleregistroViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDetalleregistroTitle}">
+            <h:form id="DetalleregistroViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{detalleregistroController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDetalleregistroLabel_dregCodigo}"/>
+                        <h:outputText value="#{detalleregistroController.selected.dregCodigo}" title="#{bundle.ViewDetalleregistroTitle_dregCodigo}"/>
+                        <h:outputText value="#{bundle.ViewDetalleregistroLabel_dregObservacion}"/>
+                        <h:outputText value="#{detalleregistroController.selected.dregObservacion}" title="#{bundle.ViewDetalleregistroTitle_dregObservacion}"/>
+                        <h:outputText value="#{bundle.ViewDetalleregistroLabel_dregHabitacion}"/>
+                        <h:outputText value="#{detalleregistroController.selected.dregHabitacion}" title="#{bundle.ViewDetalleregistroTitle_dregHabitacion}"/>
+                        <h:outputText value="#{bundle.ViewDetalleregistroLabel_dregRegistro}"/>
+                        <h:outputText value="#{detalleregistroController.selected.dregRegistro}" title="#{bundle.ViewDetalleregistroTitle_dregRegistro}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="DetalleregistroViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

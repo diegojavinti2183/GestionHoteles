@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RegistrosViewDlg" widgetVar="RegistrosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewRegistrosTitle}">
+            <h:form id="RegistrosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{registrosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewRegistrosLabel_regNumero}"/>
+                        <h:outputText value="#{registrosController.selected.regNumero}" title="#{bundle.ViewRegistrosTitle_regNumero}"/>
+                        <h:outputText value="#{bundle.ViewRegistrosLabel_regFecha}"/>
+                        <h:outputText value="#{registrosController.selected.regFecha}" title="#{bundle.ViewRegistrosTitle_regFecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewRegistrosLabel_regFechainicio}"/>
+                        <h:outputText value="#{registrosController.selected.regFechainicio}" title="#{bundle.ViewRegistrosTitle_regFechainicio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewRegistrosLabel_regFechasalida}"/>
+                        <h:outputText value="#{registrosController.selected.regFechasalida}" title="#{bundle.ViewRegistrosTitle_regFechasalida}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewRegistrosLabel_regObservacion}"/>
+                        <h:outputText value="#{registrosController.selected.regObservacion}" title="#{bundle.ViewRegistrosTitle_regObservacion}"/>
+                        <h:outputText value="#{bundle.ViewRegistrosLabel_regUsuarioing}"/>
+                        <h:outputText value="#{registrosController.selected.regUsuarioing}" title="#{bundle.ViewRegistrosTitle_regUsuarioing}"/>
+                        <h:outputText value="#{bundle.ViewRegistrosLabel_regFechaing}"/>
+                        <h:outputText value="#{registrosController.selected.regFechaing}" title="#{bundle.ViewRegistrosTitle_regFechaing}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewRegistrosLabel_regUsuariomod}"/>
+                        <h:outputText value="#{registrosController.selected.regUsuariomod}" title="#{bundle.ViewRegistrosTitle_regUsuariomod}"/>
+                        <h:outputText value="#{bundle.ViewRegistrosLabel_regFechamod}"/>
+                        <h:outputText value="#{registrosController.selected.regFechamod}" title="#{bundle.ViewRegistrosTitle_regFechamod}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewRegistrosLabel_regCliente}"/>
+                        <h:outputText value="#{registrosController.selected.regCliente}" title="#{bundle.ViewRegistrosTitle_regCliente}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="RegistrosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DetalleregistroCreateDlg" widgetVar="DetalleregistroCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDetalleregistroTitle}">
+            <h:form id="DetalleregistroCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{detalleregistroController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDetalleregistroLabel_dregCodigo}" for="dregCodigo" />
+                        <p:inputText id="dregCodigo" value="#{detalleregistroController.selected.dregCodigo}" title="#{bundle.CreateDetalleregistroTitle_dregCodigo}" required="true" requiredMessage="#{bundle.CreateDetalleregistroRequiredMessage_dregCodigo}"/>
+                        <p:outputLabel value="#{bundle.CreateDetalleregistroLabel_dregObservacion}" for="dregObservacion" />
+                        <p:inputText id="dregObservacion" value="#{detalleregistroController.selected.dregObservacion}" title="#{bundle.CreateDetalleregistroTitle_dregObservacion}" />
+                        <p:outputLabel value="#{bundle.CreateDetalleregistroLabel_dregHabitacion}" for="dregHabitacion" />
+                        <p:selectOneMenu id="dregHabitacion" value="#{detalleregistroController.selected.dregHabitacion}" required="true" requiredMessage="#{bundle.EditDetalleregistroRequiredMessage_dregHabitacion}">
+                            <f:selectItems value="#{habitacionesController.itemsAvailableSelectOne}"
+                                           var="dregHabitacionItem"
+                                           itemValue="#{dregHabitacionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateDetalleregistroLabel_dregRegistro}" for="dregRegistro" />
+                        <p:selectOneMenu id="dregRegistro" value="#{detalleregistroController.selected.dregRegistro}" required="true" requiredMessage="#{bundle.EditDetalleregistroRequiredMessage_dregRegistro}">
+                            <f:selectItems value="#{registrosController.itemsAvailableSelectOne}"
+                                           var="dregRegistroItem"
+                                           itemValue="#{dregRegistroItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{detalleregistroController.create}" value="#{bundle.Save}" update="display,:DetalleregistroListForm:datalist,:growl" oncomplete="handleSubmit(args,'DetalleregistroCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DetalleregistroCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

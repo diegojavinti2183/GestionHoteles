@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipohabitacionesCreateDlg" widgetVar="TipohabitacionesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTipohabitacionesTitle}">
+            <h:form id="TipohabitacionesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipohabitacionesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTipohabitacionesLabel_tipId}" for="tipId" />
+                        <p:inputText id="tipId" value="#{tipohabitacionesController.selected.tipId}" title="#{bundle.CreateTipohabitacionesTitle_tipId}" required="true" requiredMessage="#{bundle.CreateTipohabitacionesRequiredMessage_tipId}" maxlength="15" onkeyup="convertirMayusculas(this.id);" onblur="this.value = this.value.toUpperCase();"/>
+                        <p:outputLabel value="#{bundle.CreateTipohabitacionesLabel_tipDescripcion}" for="tipDescripcion" />
+                        <p:inputText id="tipDescripcion" value="#{tipohabitacionesController.selected.tipDescripcion}" title="#{bundle.CreateTipohabitacionesTitle_tipDescripcion}" required="true" requiredMessage="#{bundle.CreateTipohabitacionesRequiredMessage_tipDescripcion}" size="60" maxlength="100" onkeyup="convertirMayusculas(this.id);" onblur="this.value = this.value.toUpperCase();"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipohabitacionesController.create}" value="#{bundle.Save}" update="display,:TipohabitacionesListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipohabitacionesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TipohabitacionesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

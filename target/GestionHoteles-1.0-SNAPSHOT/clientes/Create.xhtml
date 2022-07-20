@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClientesCreateDlg" widgetVar="ClientesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateClientesTitle}">
+            <h:form id="ClientesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{clientesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateClientesLabel_cliTipo}" for="cliTipo" />
+                        <p:selectOneMenu id="cliTipo" value="#{clientesController.selected.cliTipo}" required="true" requiredMessage="#{bundle.CreateClientesRequiredMessage_cliTipo}">
+                            <f:selectItem itemLabel="CEDULA" itemValue="C"/>
+                            <f:selectItem itemLabel="RUC" itemValue="C"/>
+                            <f:selectItem itemLabel="PASAPORTE" itemValue="P"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateClientesLabel_cliId}" for="cliId" />
+                        <p:inputText id="cliId" value="#{clientesController.selected.cliId}" title="#{bundle.CreateClientesTitle_cliId}" required="true" requiredMessage="#{bundle.CreateClientesRequiredMessage_cliId}" maxlength="15" onkeyup="convertirMayusculas(this.id);" onblur="this.value = this.value.toUpperCase();"/>
+                        <p:outputLabel value="#{bundle.CreateClientesLabel_cliNombre}" for="cliNombre" />
+                        <p:inputText id="cliNombre" value="#{clientesController.selected.cliNombre}" title="#{bundle.CreateClientesTitle_cliNombre}" required="true" requiredMessage="#{bundle.CreateClientesRequiredMessage_cliNombre}" size="60" maxlength="200" onkeyup="convertirMayusculas(this.id);" onblur="this.value = this.value.toUpperCase();"/>
+                        <p:outputLabel value="#{bundle.CreateClientesLabel_cliDireccion}" for="cliDireccion" />
+                        <p:inputText id="cliDireccion" value="#{clientesController.selected.cliDireccion}" title="#{bundle.CreateClientesTitle_cliDireccion}" required="true" requiredMessage="#{bundle.CreateClientesRequiredMessage_cliDireccion}" size="60" maxlength="100" onkeyup="convertirMayusculas(this.id);" onblur="this.value = this.value.toUpperCase();"/>
+                        <p:outputLabel value="#{bundle.CreateClientesLabel_cliCelular}" for="cliCelular" />
+                        <p:inputText id="cliCelular" value="#{clientesController.selected.cliCelular}" title="#{bundle.CreateClientesTitle_cliCelular}" required="true" requiredMessage="#{bundle.CreateClientesRequiredMessage_cliCelular}" maxlength="10"/>
+                        <p:outputLabel value="#{bundle.CreateClientesLabel_cliTelefono}" for="cliTelefono" />
+                        <p:inputText id="cliTelefono" value="#{clientesController.selected.cliTelefono}" title="#{bundle.CreateClientesTitle_cliTelefono}" maxlength="10"/>
+                        <p:outputLabel value="#{bundle.CreateClientesLabel_cliCorreo}" for="cliCorreo" />
+                        <p:inputText id="cliCorreo" value="#{clientesController.selected.cliCorreo}" title="#{bundle.CreateClientesTitle_cliCorreo}" maxlength="100"/>
+                        <p:outputLabel value="#{bundle.CreateClientesLabel_cliHotel}" for="cliHotel" />
+                        <p:selectOneMenu id="cliHotel" value="#{clientesController.selected.cliHotel}" required="true" requiredMessage="#{bundle.EditClientesRequiredMessage_cliHotel}">
+                            <f:selectItems value="#{hotelesController.itemsAvailableSelectOne}"
+                                           var="cliHotelItem"
+                                           itemValue="#{cliHotelItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{clientesController.create}" value="#{bundle.Save}" update="display,:ClientesListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClientesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ClientesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

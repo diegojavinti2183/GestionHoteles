@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipohabitacionesEditDlg" widgetVar="TipohabitacionesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTipohabitacionesTitle}">
+            <h:form id="TipohabitacionesEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipohabitacionesController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTipohabitacionesLabel_tipCodigo}" for="tipCodigo" />
+                        <p:inputText id="tipCodigo" value="#{tipohabitacionesController.selected.tipCodigo}" title="#{bundle.EditTipohabitacionesTitle_tipCodigo}" required="true" requiredMessage="#{bundle.EditTipohabitacionesRequiredMessage_tipCodigo}" disabled="true"/>
+                        <p:outputLabel value="#{bundle.EditTipohabitacionesLabel_tipId}" for="tipId" />
+                        <p:inputText id="tipId" value="#{tipohabitacionesController.selected.tipId}" title="#{bundle.EditTipohabitacionesTitle_tipId}" required="true" requiredMessage="#{bundle.EditTipohabitacionesRequiredMessage_tipId}" maxlength="15" onkeyup="convertirMayusculas(this.id);" onblur="this.value = this.value.toUpperCase();"/>
+                        <p:outputLabel value="#{bundle.EditTipohabitacionesLabel_tipDescripcion}" for="tipDescripcion" />
+                        <p:inputText id="tipDescripcion" value="#{tipohabitacionesController.selected.tipDescripcion}" title="#{bundle.EditTipohabitacionesTitle_tipDescripcion}" required="true" requiredMessage="#{bundle.EditTipohabitacionesRequiredMessage_tipDescripcion}" size="60" maxlength="100" onkeyup="convertirMayusculas(this.id);" onblur="this.value = this.value.toUpperCase();"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipohabitacionesController.update}" value="#{bundle.Save}" update="display,:TipohabitacionesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TipohabitacionesEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TipohabitacionesEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
