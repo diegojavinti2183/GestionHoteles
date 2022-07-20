@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Detalleregistro.findAll", query = "SELECT d FROM Detalleregistro d")
     , @NamedQuery(name = "Detalleregistro.findByDregCodigo", query = "SELECT d FROM Detalleregistro d WHERE d.dregCodigo = :dregCodigo")
+        , @NamedQuery(name = "Detalleregistro.findByDregNoOcupadas", query = "SELECT d.dregHabitacion FROM Detalleregistro d WHERE d.dregCodigo = :dregCodigo")
     , @NamedQuery(name = "Detalleregistro.findByDregObservacion", query = "SELECT d FROM Detalleregistro d WHERE d.dregObservacion = :dregObservacion")})
 public class Detalleregistro implements Serializable {
 

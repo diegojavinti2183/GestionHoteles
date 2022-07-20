@@ -6,6 +6,9 @@
 package com.gestionhoteles.servicios;
 
 import com.gestionhoteles.entidades.Habitaciones;
+import com.gestionhoteles.entidades.Hoteles;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +31,17 @@ public class HabitacionesFacade extends AbstractFacade<Habitaciones> {
     public HabitacionesFacade() {
         super(Habitaciones.class);
     }
-    
+
+    /////////////Consulta solo habitaciones de un Hotel////////////////
+    public List<Habitaciones> registroHabitaciones(Date fecha) {
+        List<Habitaciones> result = null;
+        javax.persistence.Query q = getEntityManager().createNamedQuery("Habitaciones.findByHabHotelHabitaciones");
+       // q.setParameter("hotel", hotel);
+        q.setParameter("fecha", fecha);
+        if (!q.getResultList().isEmpty()) {
+            result = q.getResultList();
+        }
+        return result;
+    }
+
 }
