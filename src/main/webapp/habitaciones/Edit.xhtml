@@ -18,6 +18,9 @@
                         <p:inputText id="habId" value="#{habitacionesController.selected.habId}" title="#{bundle.EditHabitacionesTitle_habId}" required="true" requiredMessage="#{bundle.EditHabitacionesRequiredMessage_habId}" maxlength="15" onkeyup="convertirMayusculas(this.id);" onblur="this.value = this.value.toUpperCase();"/>
                         <p:outputLabel value="#{bundle.EditHabitacionesLabel_habDescripcion}" for="habDescripcion" />
                         <p:inputText id="habDescripcion" value="#{habitacionesController.selected.habDescripcion}" title="#{bundle.EditHabitacionesTitle_habDescripcion}" required="true" requiredMessage="#{bundle.EditHabitacionesRequiredMessage_habDescripcion}" size="60" maxlength="100" onkeyup="convertirMayusculas(this.id);" onblur="this.value = this.value.toUpperCase();"/>
+                        <p:outputLabel value="#{bundle.CreateHabitacionesLabel_habValor}" for="habValor" />
+                        <p:inputText id="habDescripcion" value="#{habitacionesController.selected.habValor}" title="#{bundle.CreateHabitacionesTitle_habValor}" required="true" requiredMessage="#{bundle.CreateHabitacionesRequiredMessage_habValor}"/>
+                     
                         <p:outputLabel value="#{bundle.EditHabitacionesLabel_habHotel}" for="habHotel" />
                         <p:selectOneMenu id="habHotel" value="#{habitacionesController.selected.habHotel}" required="true" requiredMessage="#{bundle.EditHabitacionesRequiredMessage_habHotel}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
