@@ -6,6 +6,7 @@ import com.gestionhoteles.controladores.util.JsfUtil.PersistAction;
 import com.gestionhoteles.entidades.Detalleregistro;
 import com.gestionhoteles.entidades.Habitaciones;
 import com.gestionhoteles.servicios.DetalleregistroFacade;
+import com.gestionhoteles.servicios.HabitacionesFacade;
 import com.gestionhoteles.servicios.RegistrosFacade;
 
 import java.io.Serializable;
@@ -32,6 +33,8 @@ public class RegistrosController implements Serializable {
     private com.gestionhoteles.servicios.RegistrosFacade ejbFacade;
     @EJB
     private com.gestionhoteles.servicios.DetalleregistroFacade ejbFacade2;
+    @EJB
+    private com.gestionhoteles.servicios.HabitacionesFacade ejbFacade3;
     private List<Registros> items = null;
     private List<Detalleregistro> itemsDetalle = null;
     private List<Habitaciones> itemsHabitaciones = null;
@@ -58,9 +61,13 @@ public class RegistrosController implements Serializable {
     private RegistrosFacade getFacade() {
         return ejbFacade;
     }
-    
+
     private DetalleregistroFacade getFacade2() {
         return ejbFacade2;
+    }
+
+    private HabitacionesFacade getFacade3() {
+        return ejbFacade3;
     }
 
     public Registros prepareCreate() {
@@ -69,25 +76,33 @@ public class RegistrosController implements Serializable {
         itemsDetalle = new ArrayList<>();
         getSelected().setRegFecha(new Date());
         getSelected().setRegFechainicio(new Date());
+        itemsHabitaciones = getFacade3().registroHabitaciones(new Date());
         initializeEmbeddableKey();
         return getSelected();
     }
 
     public void create() {
+        selected.setRegUsuarioing("root");
+        selected.setRegFechaing(new Date());
+        selected.setRegUsuariomod("root");
+        selected.setRegFechamod(new Date());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("RegistrosCreated"));
         if (!JsfUtil.isValidationFailed()) {
+            for (Detalleregistro detalle : itemsDetalle) {
+                getFacade2().create(detalle);
+            }
             setItems(null);    // Invalidate list of items to trigger re-query.
         }
     }
-    
+
     public void agregar() {
-        System.out.println("selectedDetalle "+selectedDetalle.getDregObservacion());
+        System.out.println("selectedDetalle " + selectedDetalle.getDregObservacion());
         selectedDetalle.setDregRegistro(selected);
         itemsDetalle.add(selectedDetalle);
         setSelectedDetalle(new Detalleregistro());
-//        if (!JsfUtil.isValidationFailed()) {
-//            setItems(null);    // Invalidate list of items to trigger re-query.
-//        }
+        if (!JsfUtil.isValidationFailed()) {
+            itemsHabitaciones = getFacade3().registroHabitaciones(new Date());
+        }
     }
 
     public void update() {
@@ -208,6 +223,14 @@ public class RegistrosController implements Serializable {
 
     public void setSelectedDetalle(Detalleregistro selectedDetalle) {
         this.selectedDetalle = selectedDetalle;
+    }
+
+    public List<Habitaciones> getItemsHabitaciones() {
+        return itemsHabitaciones;
+    }
+
+    public void setItemsHabitaciones(List<Habitaciones> itemsHabitaciones) {
+        this.itemsHabitaciones = itemsHabitaciones;
     }
 
 }

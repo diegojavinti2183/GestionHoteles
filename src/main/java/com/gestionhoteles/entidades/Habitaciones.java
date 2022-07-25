@@ -37,6 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Habitaciones.findAll", query = "SELECT h FROM Habitaciones h")
     , @NamedQuery(name = "Habitaciones.findByHabCodigo", query = "SELECT h FROM Habitaciones h WHERE h.habCodigo = :habCodigo")
     , @NamedQuery(name = "Habitaciones.findByHabId", query = "SELECT h FROM Habitaciones h WHERE h.habId = :habId")
+    //, @NamedQuery(name = "Habitaciones.findByHabHotelHabitaciones", query = "SELECT h FROM Habitaciones h WHERE h.habHotel = :hotel AND h.habId NOT IN (SELECT d.dregHabitacion FROM Detalleregistro d WHERE CAST(d.dregRegistro.regFechasalida AS DATE) < :fecha)")
+    , @NamedQuery(name = "Habitaciones.findByHabHotelHabitaciones", query = "SELECT h FROM Habitaciones h WHERE h.habId NOT IN (SELECT d.dregHabitacion.habId FROM Detalleregistro d WHERE CAST(d.dregRegistro.regFechasalida AS DATE) < :fecha)")
     , @NamedQuery(name = "Habitaciones.findByHabDescripcion", query = "SELECT h FROM Habitaciones h WHERE h.habDescripcion = :habDescripcion")})
 public class Habitaciones implements Serializable {
 
