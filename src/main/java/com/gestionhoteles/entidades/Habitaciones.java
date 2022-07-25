@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author diego
  */
+//Probando commit
 @Entity
 @Table(name = "habitaciones")
 @XmlRootElement
